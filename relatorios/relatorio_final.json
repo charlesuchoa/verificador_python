@@ -1,0 +1,139 @@
+{
+    "bandit": {
+        "sudoku_err.py": [
+            {
+                "code": "41     \"\"\"10% de chance de inserir um erro proposital no Sudoku\"\"\"\n42     if random.random() < 0.1:\n43         print(\"\\n\u26a0\ufe0f  Falha proposital inserida no Sudoku!\\n\")\n",
+                "col_offset": 7,
+                "end_col_offset": 22,
+                "filename": ".\\sudoku_err_sem_comentarios.py",
+                "issue_confidence": "HIGH",
+                "issue_cwe": {
+                    "id": 330,
+                    "link": "https://cwe.mitre.org/data/definitions/330.html"
+                },
+                "issue_severity": "LOW",
+                "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+                "line_number": 42,
+                "line_range": [
+                    42
+                ],
+                "more_info": "https://bandit.readthedocs.io/en/1.7.10/blacklists/blacklist_calls.html#b311-random",
+                "test_id": "B311",
+                "test_name": "blacklist"
+            },
+            {
+                "code": "43         print(\"\\n\u26a0\ufe0f  Falha proposital inserida no Sudoku!\\n\")\n44         linha = random.randint(0, N - 1)\n45         coluna = random.randint(0, N - 1)\n",
+                "col_offset": 16,
+                "end_col_offset": 40,
+                "filename": ".\\sudoku_err_sem_comentarios.py",
+                "issue_confidence": "HIGH",
+                "issue_cwe": {
+                    "id": 330,
+                    "link": "https://cwe.mitre.org/data/definitions/330.html"
+                },
+                "issue_severity": "LOW",
+                "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+                "line_number": 44,
+                "line_range": [
+                    44
+                ],
+                "more_info": "https://bandit.readthedocs.io/en/1.7.10/blacklists/blacklist_calls.html#b311-random",
+                "test_id": "B311",
+                "test_name": "blacklist"
+            },
+            {
+                "code": "44         linha = random.randint(0, N - 1)\n45         coluna = random.randint(0, N - 1)\n46         valor_invalido = tabuleiro[linha][coluna]\n",
+                "col_offset": 17,
+                "end_col_offset": 41,
+                "filename": ".\\sudoku_err_sem_comentarios.py",
+                "issue_confidence": "HIGH",
+                "issue_cwe": {
+                    "id": 330,
+                    "link": "https://cwe.mitre.org/data/definitions/330.html"
+                },
+                "issue_severity": "LOW",
+                "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+                "line_number": 45,
+                "line_range": [
+                    45
+                ],
+                "more_info": "https://bandit.readthedocs.io/en/1.7.10/blacklists/blacklist_calls.html#b311-random",
+                "test_id": "B311",
+                "test_name": "blacklist"
+            },
+            {
+                "code": "47         while valor_invalido == tabuleiro[linha][coluna]:\n48             valor_invalido = random.randint(1, N)\n49         tabuleiro[linha][coluna] = valor_inv_\n",
+                "col_offset": 29,
+                "end_col_offset": 49,
+                "filename": ".\\sudoku_err_sem_comentarios.py",
+                "issue_confidence": "HIGH",
+                "issue_cwe": {
+                    "id": 330,
+                    "link": "https://cwe.mitre.org/data/definitions/330.html"
+                },
+                "issue_severity": "LOW",
+                "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+                "line_number": 48,
+                "line_range": [
+                    48
+                ],
+                "more_info": "https://bandit.readthedocs.io/en/1.7.10/blacklists/blacklist_calls.html#b311-random",
+                "test_id": "B311",
+                "test_name": "blacklist"
+            }
+        ]
+    },
+    "flake8": {
+        "sudoku_err.py": [
+            {
+                "file": "sudoku_err_sem_comentarios.py",
+                "line": 4,
+                "column": 1,
+                "message": "E302 expected 2 blank lines, found 0",
+                "code": "E302",
+                "description": "Esperado 2 linhas em branco antes da defini\u00e7\u00e3o."
+            },
+            {
+                "file": "sudoku_err_sem_comentarios.py",
+                "line": 14,
+                "column": 1,
+                "message": "E302 expected 2 blank lines, found 0",
+                "code": "E302",
+                "description": "Esperado 2 linhas em branco antes da defini\u00e7\u00e3o."
+            },
+            {
+                "file": "sudoku_err_sem_comentarios.py",
+                "line": 26,
+                "column": 1,
+                "message": "E302 expected 2 blank lines, found 0",
+                "code": "E302",
+                "description": "Esperado 2 linhas em branco antes da defini\u00e7\u00e3o."
+            },
+            {
+                "file": "sudoku_err_sem_comentarios.py",
+                "line": 40,
+                "column": 1,
+                "message": "E302 expected 2 blank lines, found 0",
+                "code": "E302",
+                "description": "Esperado 2 linhas em branco antes da defini\u00e7\u00e3o."
+            },
+            {
+                "file": "sudoku_err_sem_comentarios.py",
+                "line": 49,
+                "column": 36,
+                "message": "F821 undefined name 'valor_inv_'",
+                "code": "F821",
+                "description": "Nome indefinido."
+            },
+            {
+                "file": "sudoku_err_sem_comentarios.py",
+                "line": 49,
+                "column": 46,
+                "message": "W292 no newline at end of file",
+                "code": "W292",
+                "description": "Arquivo n\u00e3o termina com nova linha."
+            }
+        ]
+    },
+    "formal": []
+}

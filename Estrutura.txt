@@ -1,0 +1,37 @@
+python_verificador_prototipo/
+
++-- interface/
+
+¦   +-- __pycache/
+
+¦	+-- cli.cpython-38.pyc
+¦   +-- cli.py 
+¦   verificador_formal/
+¦   +-- __pycache/
+
+¦	+-- z3_verifier.cpython-38.pyc
+¦   +-- z3_verifier.py 
+¦   verificador_estatico/
+¦   +-- __pycache/
+
+¦	+-- flake8_analyzer.cpython-38.pyc
+¦	+-- bandit_analyzer.cpython-38.pyc
+¦   +-- flake8_analyzer.py
+¦   +-- bandit_analyzer.py
+¦   relatorios/
+¦   +-- __pycache/
+
+¦	+-- relatorio_html.cpython-38.pyc
+¦	+-- relatorio_pdf.cpython-38.pyc
+¦	+-- gerador_relatorio.cpython-38.pyc
+¦   +-- gerador_relatorio.py
+¦   +-- relatorio_pdf.py
+¦   +-- relatorio_html.py
+¦   +-- bandit_analyzer.py
+¦   testes_automatizados/
+¦   +-- hypothesis_tester.py 
++-- main.py                # Interface via terminal
+
++-- requirements.txt
+
++-- README.md

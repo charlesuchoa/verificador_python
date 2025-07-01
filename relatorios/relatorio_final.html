@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang='pt-BR'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Relatório de Verificação</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h2 { color: #2E86C1; }
+        .section { margin-bottom: 30px; }
+        .item { margin-left: 20px; }
+        pre { background: #f4f4f4; padding: 10px; }
+    </style>
+</head>
+<body>
+<h1>Relatório de Verificação de Código</h1>
+<div class='section'><h2>Análise Bandit</h2><h3>sudoku_err.py</h3><ul><li class='item'>Linha 42: Standard pseudo-random generators are not suitable for security/cryptographic purposes.</li><li class='item'>Linha 44: Standard pseudo-random generators are not suitable for security/cryptographic purposes.</li><li class='item'>Linha 45: Standard pseudo-random generators are not suitable for security/cryptographic purposes.</li><li class='item'>Linha 48: Standard pseudo-random generators are not suitable for security/cryptographic purposes.</li></ul></div><div class='section'><h2>Análise Flake8</h2><h3>sudoku_err.py</h3><ul><li class='item'>Linha 4: E302 expected 2 blank lines, found 0</li><li class='item'>Linha 14: E302 expected 2 blank lines, found 0</li><li class='item'>Linha 26: E302 expected 2 blank lines, found 0</li><li class='item'>Linha 40: E302 expected 2 blank lines, found 0</li><li class='item'>Linha 49: F821 undefined name 'valor_inv_'</li><li class='item'>Linha 49: W292 no newline at end of file</li></ul></div><div class='section'><h2>Verificação Formal</h2><ul></ul></div></body></html>

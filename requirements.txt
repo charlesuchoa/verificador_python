@@ -1,0 +1,7 @@
+bandit
+flake8
+z3-solver
+hypothesis
+pytest
+rich
+reportlab
