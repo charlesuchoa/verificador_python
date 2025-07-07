@@ -1,64 +1,65 @@
+import os
+import ast
+import argparse
+from rich.console import Console
+from verificador_formal.z3_verifier import verificar_arquivo_com_z3
+from testes_automatizados.hypothesis_runner import executar_hypothesis_em_arquivo
 from analisador_estatico.bandit_analyzer import run_bandit
 from analisador_estatico.flake8_analyzer import run_flake8
-from verificador_formal.z3_verifier import verificar_arquivo_com_z3
-from testes_automatizados.test_runner import executar_testes_hypothesis
-from rich.console import Console
 from relatorios.gerador_relatorio import gerar_relatorio
-import os
+
 
 def main_cli():
-    import argparse
     parser = argparse.ArgumentParser(description="Verificador Python inspirado no ESBMC")
-    parser.add_argument("file", help="Caminho para o arquivo Python a ser analisado")
+    parser.add_argument("file", help="Arquivo Python a ser analisado")
+    parser.add_argument("--skip-static", action="store_true", help="Ignora Bandit e Flake8")
+    parser.add_argument("--run-z3", action="store_true", help="Executa a verificação formal com Z3")
+    parser.add_argument("--run-hypothesis", action="store_true", help="Executa os testes automatizados com Hypothesis")
+    parser.add_argument("--z3-incremental", action="store_true", help="Usa verificador Z3 em modo incremental")
+    parser.add_argument("--solver", choices=["z3", "cvc5", "boolector"], default="z3", help="Escolhe o solver a ser usado na verificação formal")
+    parser.add_argument("--context-switch", type=int, default=0, help="Nível de comutação de contexto (reserva para multi-thread)")
+
     args = parser.parse_args()
-
+    file_path = args.file
     console = Console()
-    arquivos = []
 
-    if os.path.isfile(args.file):
-        arquivos = [args.file]
-    elif os.path.isdir(args.file):
-        for root, _, files in os.walk(args.file):
-            for f in files:
-                if f.endswith(".py"):
-                    arquivos.append(os.path.join(root, f))
+    resultados = {"bandit": {}, "flake8": {}, "formal": [], "hypothesis": []}
 
-    resultados = {"bandit": {}, "flake8": {}, "formal": []}
+    if not args.skip_static:
+        console.print(f"[bold green]Analisando {file_path} com Bandit e Flake8...[/bold green]")
+        resultados["bandit"][file_path] = run_bandit(file_path)
+        resultados["flake8"][file_path] = run_flake8(file_path)
 
-    for arquivo in arquivos:
-        console.print(f"\n[bold green]Analisando {arquivo}[/]")
+    if args.run_z3:
+        console.print("\n[bold yellow]Iniciando Verificação Formal com Z3:[/bold yellow]")
+        formals = verificar_arquivo_com_z3(file_path, incremental=args.z3_incremental)
+        for item in formals:
+            if "assert" in item:
+                console.print(f" [green]Propriedade:[/] assert {item['assert']}")
+                console.print(f" [cyan]Resultado:[/] {item['resultado']}")
+            elif "erro" in item:
+                console.print(f" [red]Erro:[/] {item['erro']}")
+        resultados["formal"].extend(formals)
 
-        # Análise com Bandit
-        bandit_results = run_bandit(arquivo)
-        console.print("[bold yellow]Bandit:[/bold yellow]")
-        for item in bandit_results:
-            console.print(f" {item['line_number']}: {item['issue_text']}")
-        resultados["bandit"][arquivo] = bandit_results
+    if args.run_hypothesis:
+        console.print("\n[bold cyan]Iniciando Testes com Hypothesis:[/bold cyan]")
+        hypothesis_result = executar_hypothesis_em_arquivo(file_path)
+        for res in hypothesis_result:
+            if "teste" in res:
+                console.print(f" [blue]Teste:[/] {res['teste']} -> {res['resultado']}")
+            elif "erro" in res:
+                console.print(f" [red]Erro de execução:[/] {res['erro']}")
+        resultados["hypothesis"].append(hypothesis_result)
 
-        # Análise com Flake8
-        flake8_results = run_flake8(arquivo)
-        console.print(f"[magenta]Flake8:[/]")
-        for item in flake8_results:
-            console.print(f" {item['line']}: {item['message']}")
-            console.print(f"    → [dim]{item['description']}[/]")
-        resultados["flake8"][arquivo] = flake8_results
-
-        # Verificação formal com Z3
-        console.print("[blue]\nIniciando verificação formal com Z3...[/blue]")
-        z3_resultados = verificar_arquivo_com_z3(arquivo)
-        for prop, resultado in z3_resultados:
-            resultados["formal"].append({"propriedade": prop, "resultado": resultado})
-
-    # Executa testes Hypothesis (caso arquivo esteja presente)
-    hypo_teste_path = "testes_automatizados/hypothesis_tester.py"
-    if os.path.exists(hypo_teste_path):
-        executar_testes_hypothesis(hypo_teste_path)
-
-    # Geração de relatórios
+    # Gera relatório final
     gerar_relatorio(resultados)
 
     from relatorios.relatorio_html import gerar_relatorio_html
-    gerar_relatorio_html(resultados)
-
     from relatorios.relatorio_pdf import gerar_relatorio_pdf
+
+    gerar_relatorio_html(resultados)
     gerar_relatorio_pdf(resultados)
+
+
+if __name__ == "__main__":
+    main_cli()
