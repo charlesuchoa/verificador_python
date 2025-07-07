@@ -38,6 +38,7 @@ Uso da aplicação:
 por linha de comando: 
 
 python main.py nome_do_arquivo.py --run-z3 (com uso do Z3)
+
 python main.py nome_do_arquivo.py (com uso do Flake e Bandit)
 
 podem ser utilizados também os seguintes parâmetros após o nome_do_arquivo.py:
