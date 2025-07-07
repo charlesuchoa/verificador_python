@@ -12,6 +12,8 @@ cd python_verificador
 
 git clone https://github.com/charlesuchoa/verificador_python.git
 
+Obs.: Utilizar o branch main.
+
 
 Para do sistema é necessário a instalação de:
 
