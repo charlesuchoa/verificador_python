@@ -3,6 +3,7 @@ Início do projeto piloto de verificador de sistemas em Python
 
 Este projeto piloto propõe o desenvolvimento e documentação de um sistema modular e extensível de verificação de software em Python, voltado para aplicações com requisitos críticos como confiabilidade, segurança e comportamento determinístico. A proposta central é unir, em uma única plataforma, técnicas tradicionais de análise estática, verificação formal simbólica e testes automatizados baseados em propriedades, de modo a fornecer uma visão ampla e estruturada da confiabilidade de sistemas implementados em Python.
 
+
 Para uso do projeto:
 
 mkdir python_verificador
@@ -40,6 +41,7 @@ por linha de comando:
 python main.py nome_do_arquivo.py --run-z3 (com uso do Z3)
 
 python main.py nome_do_arquivo.py (com uso do Flake e Bandit)
+
 
 podem ser utilizados também os seguintes parâmetros após o nome_do_arquivo.py:
 
