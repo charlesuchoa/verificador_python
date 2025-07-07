@@ -39,7 +39,16 @@ def gerar_relatorio_html(dados, arquivo_html="relatorios/relatorio_final.html"):
 
     html_conteudo += "<div class='section'><h2>Verificação Formal</h2><ul>"
     for verif in dados.get("formal", []):
-        html_conteudo += f"<li class='item'>{verif['propriedade']}: {verif['resultado']}</li>"
+        if "propriedade" in verif:
+            html_conteudo += f"<li class='item'>{verif['propriedade']}: {verif['resultado']}</li>"
+        elif "assert" in verif:
+            html_conteudo += f"<li class='item'>[assert] {verif['assert']}: {verif['resultado']}</li>"
+        elif "erro" in verif:
+            html_conteudo += f"<li class='item'>Erro: {verif['erro']}</li>"
+        else:
+            html_conteudo += f"<li class='item'>Verificação desconhecida: {verif}</li>"
+
+
     html_conteudo += "</ul></div>"
 
     html_fim = "</body></html>"

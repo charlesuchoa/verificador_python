@@ -41,7 +41,14 @@ def gerar_relatorio_pdf(dados, arquivo_pdf="relatorios/relatorio_final.pdf"):
     escreve_linha("Verificação Formal:")
     c.setFont("Helvetica", 11)
     for item in dados.get("formal", []):
-        escreve_linha(f"{item['propriedade']}: {item['resultado']}", indent=0.5)
+        if "propriedade" in item:
+            escreve_linha(f"{item['propriedade']}: {item['resultado']}", indent=0.5)
+        elif "assert" in item:
+            escreve_linha(f"[assert] {item['assert']}: {item['resultado']}", indent=0.5)
+        elif "erro" in item:
+            escreve_linha(f"Erro: {item['erro']}", indent=0.5)
+        else:
+            escreve_linha(str(item), indent=0.5)
 
     c.save()
     print(f"Relatório PDF salvo em: {arquivo_pdf}")
