@@ -51,8 +51,8 @@ podem ser utilizados também os seguintes parâmetros após o nome_do_arquivo.py
 
 --z3-incremental	-> Ativa o modo incremental de verificação com o solver Z3.
 
---run-hypothesis	-> Executa testes automatizados com a biblioteca Hypothesis.
+--run-hypothesis	-> Executa testes automatizados com a biblioteca Hypothesis (em omplementação).
 
---context-switch N` 	-> Nível de comutação de contexto simulado (reserva para multithreading).
+--context-switch N` 	-> Nível de comutação de contexto simulado (reserva para multithreading) (em omplementação).
 
 --skip-static		-> Ignora os analisadores estáticos Bandit e Flake8.
